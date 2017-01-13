@@ -1,3 +1,5 @@
+"use strict";
+
 const express = require('express')
 const router = express.Router();
 
@@ -10,6 +12,13 @@ router.get('/by-subreddit/:subreddit', (req, res) => {
 	Post.find({
 		subredditId: subredditId
 	}, (err, results) => {
+		res.json(results);
+	});
+});
+
+router.post('/posts', (req, res) => {
+	var newPost = new Post(req.body);
+	newPost.save((err, results) => {
 		res.json(results);
 	});
 });
